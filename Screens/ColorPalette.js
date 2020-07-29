@@ -16,9 +16,6 @@ const ColorPalette = ({ route }) => {
         renderItem={({ item }) => {
           return <ColorBox colorName={item.colorName} hexCode={item.hexCode} />;
         }}
-        ListHeaderComponent={
-          <Text style={styles.text}>'{paletteName}' palette:</Text>
-        }
       />
     </SafeAreaView>
   );

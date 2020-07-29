@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import db from '../db';
 import styles from '../App.styles';
+import { FlatList } from 'react-native-gesture-handler';
+import PalettePreview from '../Components/PalettePreview';
 
 const Home = ({ navigation }) => {
   return (
@@ -15,8 +17,13 @@ const Home = ({ navigation }) => {
           });
         }}
       >
-        <Text style={styles.boxText}> Solarized </Text>
+        <Text style={styles.paletteText}> Solarized </Text>
+        <PalettePreview
+          style={styles.container}
+          colors={db.solarized.slice(0, 5)}
+        />
       </TouchableOpacity>
+
       <TouchableOpacity
         style={styles.paletteLink}
         onPress={() => {
@@ -26,8 +33,13 @@ const Home = ({ navigation }) => {
           });
         }}
       >
-        <Text style={styles.boxText}> Rainbow </Text>
+        <Text style={styles.paletteText}> Rainbow </Text>
+        <PalettePreview
+          style={styles.container}
+          colors={db.rainbow.slice(0, 5)}
+        />
       </TouchableOpacity>
+
       <TouchableOpacity
         style={styles.paletteLink}
         onPress={() => {
@@ -37,7 +49,11 @@ const Home = ({ navigation }) => {
           });
         }}
       >
-        <Text style={styles.boxText}> Front-End </Text>
+        <Text style={styles.paletteText}> Front-End </Text>
+        <PalettePreview
+          style={styles.container}
+          colors={db.frontend_masters.slice(0, 5)}
+        />
       </TouchableOpacity>
     </View>
   );

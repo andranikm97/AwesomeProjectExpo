@@ -27,18 +27,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  previewBox: {
+    borderRadius: 5,
+    marginRight: 5,
+    width: '15vw',
+    height: 50,
+  },
   paletteLink: {
     borderRadius: 5,
     padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     marginVertical: 10,
-    backgroundColor: 'blue',
+    // backgroundColor: 'blue',
   },
   paletteText: {
-    fontSize: 18,
+    fontSize: 25,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'black',
   },
 });
 
