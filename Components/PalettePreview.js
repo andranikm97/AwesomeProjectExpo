@@ -6,7 +6,7 @@ import ColorBoxPreview from './ColorBoxPreview';
 const PalettePreview = ({ colors }) => {
   return (
     <FlatList
-      style={{ marginTop: 15 }}
+      style={{ marginTop: 15, padding: 3 }}
       horizontal={true}
       data={colors}
       keyExtractor={(item) => item.colorName}
