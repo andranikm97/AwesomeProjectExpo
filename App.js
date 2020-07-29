@@ -1,21 +1,42 @@
-import { StatusBar } from 'expo-status-bar';
+import styles from './App.styles';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, Text, SafeAreaView, FlatList } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import ColorBox from './Components/ColorBox.js';
+import db from './db';
 
-export default function App() {
+const App = () => {
+  const COLORS = db.colors;
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    <NavigationContainer>
+      <SafeAreaView style={styles.androidSafeArea}>
+        {/* <Text style={styles.text}>
+            Here are some boxes of different colors{' '}
+          </Text> */}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+        {/* <ColorBox colorName="Cyan" hexCode="#2aa198" />
+          <ColorBox colorName="Blue" hexCode="#268bd2" />
+          <ColorBox colorName="Magenta" hexCode="#d33682" />
+          <ColorBox colorName="Orange" hexCode="#cb4b16" /> */}
+
+        <FlatList
+          style={styles.container}
+          data={COLORS}
+          keyExtractor={(item) => item.colorName}
+          renderItem={({ item }) => {
+            return (
+              <ColorBox colorName={item.colorName} hexCode={item.hexCode} />
+            );
+          }}
+          ListHeaderComponent={
+            <Text style={styles.text}>
+              Here are some boxes of different colors{' '}
+            </Text>
+          }
+        />
+      </SafeAreaView>
+    </NavigationContainer>
+  );
+};
+
+export default App;
