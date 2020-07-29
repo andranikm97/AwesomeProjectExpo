@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   androidSafeArea: {
-    paddingTop: Platform.OS === 'android' ? 35 : 0,
+    // paddingTop: Platform.OS === 'android' ? 35 : 0,
     flex: 1,
   },
   pinkBack: {
@@ -26,6 +26,19 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  paletteLink: {
+    borderRadius: 5,
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 10,
+    backgroundColor: 'blue',
+  },
+  paletteText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });
 
