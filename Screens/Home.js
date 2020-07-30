@@ -1,60 +1,52 @@
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import db from '../db';
+import React, { useEffect, useCallback, useState } from 'react';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
+import ApiClient from '../Services/ApiService';
 import styles from '../App.styles';
-import { FlatList } from 'react-native-gesture-handler';
 import PalettePreview from '../Components/PalettePreview';
 
 const Home = ({ navigation }) => {
+  const [colorPalettes, setColorPalettes] = useState([]);
+
+  const fetchColorPalettes = useCallback(async () => {
+    const results = await fetch(
+      'https://color-palette-api.kadikraman.now.sh/palettes',
+    );
+    if (results.ok) {
+      const palettes = await results.json();
+      setColorPalettes(palettes);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchColorPalettes();
+  }, []);
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.paletteLink}
-        onPress={() => {
-          navigation.navigate('Solarized', {
-            paletteName: 'Solarized',
-            colors: db.solarized,
-          });
+      <FlatList
+        data={colorPalettes}
+        keyExtractor={(colorPalettes) => `${colorPalettes.id}`}
+        renderItem={({ item }) => {
+          const { paletteName, colors } = item;
+          return (
+            <TouchableOpacity
+              style={styles.paletteLink}
+              onPress={() => {
+                navigation.navigate(paletteName, {
+                  paletteName: paletteName,
+                  colors: colors,
+                });
+              }}
+            >
+              <Text style={styles.paletteText}> {paletteName} </Text>
+              <PalettePreview
+                style={styles.container}
+                colors={colors.slice(0, 5)}
+              />
+            </TouchableOpacity>
+          );
         }}
-      >
-        <Text style={styles.paletteText}> Solarized </Text>
-        <PalettePreview
-          style={styles.container}
-          colors={db.solarized.slice(0, 5)}
-        />
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.paletteLink}
-        onPress={() => {
-          navigation.navigate('Rainbow', {
-            paletteName: 'Rainbow',
-            colors: db.rainbow,
-          });
-        }}
-      >
-        <Text style={styles.paletteText}> Rainbow </Text>
-        <PalettePreview
-          style={styles.container}
-          colors={db.rainbow.slice(0, 5)}
-        />
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.paletteLink}
-        onPress={() => {
-          navigation.navigate('Frontend', {
-            paletteName: 'Front-End Masters',
-            colors: db.frontend_masters,
-          });
-        }}
-      >
-        <Text style={styles.paletteText}> Front-End </Text>
-        <PalettePreview
-          style={styles.container}
-          colors={db.frontend_masters.slice(0, 5)}
-        />
-      </TouchableOpacity>
+      />
     </View>
   );
 };
