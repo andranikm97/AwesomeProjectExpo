@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, Text, FlatList } from 'react-native';
-import styles from '../App.styles';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
 import ColorBoxPreview from './ColorBoxPreview';
 
 const PalettePreview = ({ colors }) => {
   return (
     <FlatList
-      style={{ marginTop: 15, padding: 3 }}
+      style={styles.container}
       horizontal={true}
       data={colors}
       keyExtractor={(item) => item.colorName}
@@ -16,5 +15,12 @@ const PalettePreview = ({ colors }) => {
     />
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 15,
+    padding: 3,
+  },
+});
 
 export default PalettePreview;
