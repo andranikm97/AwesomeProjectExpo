@@ -1,65 +1,40 @@
-import styles from './App.styles';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from './Screens/Home';
 import ColorPalette from './Screens/ColorPalette';
+import ColorPaletteModal from './Screens/ColorPaletteModal';
 import { createStackNavigator } from '@react-navigation/stack';
-import db from './db';
 
-import { Text, FlatList } from 'react-native';
+const RootStack = createStackNavigator();
+const MainStack = createStackNavigator();
 
-const Stack = createStackNavigator();
+const MainStackScreen = () => {
+  return (
+    <MainStack.Navigator>
+      <MainStack.Screen name="Home" component={Home} />
+      <MainStack.Screen
+        name="ColorPalette"
+        component={ColorPalette}
+        options={({ route }) => ({ title: route.params.paletteName })}
+      />
+    </MainStack.Navigator>
+  );
+};
+
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen
-          name="Solarized"
-          component={ColorPalette}
-          options={({ route }) => ({ title: route.params.paletteName })}
+      <RootStack.Navigator mode="modal">
+        <RootStack.Screen
+          name="Main"
+          component={MainStackScreen}
+          options={{ headerShown: false }}
         />
-        <Stack.Screen
-          name="Frontend Masters"
-          component={ColorPalette}
-          options={({ route }) => ({ title: route.params.paletteName })}
+        <RootStack.Screen
+          name="ColorPaletteModal"
+          component={ColorPaletteModal}
         />
-        <Stack.Screen
-          name="Rainbow"
-          component={ColorPalette}
-          options={({ route }) => ({ title: route.params.paletteName })}
-        />
-        <Stack.Screen
-          name="Giant Goldfish"
-          component={ColorPalette}
-          options={({ route }) => ({ title: route.params.paletteName })}
-        />
-        <Stack.Screen
-          name="Thought Provoking"
-          component={ColorPalette}
-          options={({ route }) => ({ title: route.params.paletteName })}
-        />
-        <Stack.Screen
-          name="Ocean Five"
-          component={ColorPalette}
-          options={({ route }) => ({ title: route.params.paletteName })}
-        />
-        <Stack.Screen
-          name="Compatible"
-          component={ColorPalette}
-          options={({ route }) => ({ title: route.params.paletteName })}
-        />
-        <Stack.Screen
-          name="Good Friends"
-          component={ColorPalette}
-          options={({ route }) => ({ title: route.params.paletteName })}
-        />
-        <Stack.Screen
-          name="Headache"
-          component={ColorPalette}
-          options={({ route }) => ({ title: route.params.paletteName })}
-        />
-      </Stack.Navigator>
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 };

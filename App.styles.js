@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   previewBox: {
     borderRadius: 5,
     marginRight: 5,
-    width: '15vw',
+    width: 60,
     height: 50,
     shadowColor: '#000',
     shadowOffset: { width: 3, height: 3 },

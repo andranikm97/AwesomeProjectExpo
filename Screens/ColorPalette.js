@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text, FlatList, SafeAreaView } from 'react-native';
+import { FlatList, SafeAreaView } from 'react-native';
 import styles from '../App.styles';
 import db from '../db';
 import ColorBox from '../Components/ColorBox';
 
 const ColorPalette = ({ route }) => {
-  const { colors, paletteName } = route.params;
+  const { colors } = route.params;
 
   return (
     <SafeAreaView style={styles.androidSafeArea}>
